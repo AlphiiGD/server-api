@@ -1,5 +1,5 @@
 {
-  "geode": "5.0.0-alpha.2",
+  "geode": "5.0.1",
   "gd": {
     "win": "2.2081",
     "android": "2.2081",
@@ -8,7 +8,7 @@
   },
   "id": "km7dev.server_api",
   "name": "Server API",
-  "version": "v3.0.0",
+  "version": "v3.1.0",
   "developer": "km7dev",
   "description": "An API for using other GD servers",
   "api": {

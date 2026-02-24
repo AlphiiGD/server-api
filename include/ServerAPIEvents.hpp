@@ -58,21 +58,21 @@ inline void updateServer(int id, ::std::string url, int priority, ::geode::Mod* 
 /// @brief Updates an existing server
 /// @param server The information to update the server with, the ID being a handle to the already existing server
 inline void updateServer(Server server, ::geode::Mod* sender = ::geode::Mod::get()) {
-  updateServer(server.id, ::std::move(server.url), server.priority, sender);
+    updateServer(server.id, ::std::move(server.url), server.priority, sender);
 }
 
 /// @brief Updates an existing server without updating its priority
 /// @param id Handle to an already existing server
 /// @param url The new url for the server to use
 inline void updateServer(int id, ::std::string url, ::geode::Mod* sender = ::geode::Mod::get()) {
-  updateServer(id, ::std::move(url), 0, sender);
+    updateServer(id, ::std::move(url), 0, sender);
 }
 
 /// @brief Updates an existing server without updating its URL
 /// @param id Handle to an already existing server
 /// @param priority The new priority for ServerAPI
 inline void updateServer(int id, int priority, ::geode::Mod* sender = ::geode::Mod::get()) {
-  updateServer(id, "", priority, sender);
+    updateServer(id, "", priority, sender);
 }
 
 /// @brief Removes a server from the registry

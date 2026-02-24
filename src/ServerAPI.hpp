@@ -22,7 +22,13 @@ private:
         std::string URL;
         int Priority;
 
-        static const ServerCache none() { return {0, "NONE_REGISTERED", INT_MIN}; }
+        static const ServerCache none() {
+            return {
+                .ID = 0,
+                .URL = "NONE_REGISTERED",
+                .Priority = INT_MIN
+            };
+        }
     };
     ServerCache m_cache;
     // <id, <url, prio>>
@@ -31,6 +37,7 @@ private:
     std::string m_secondaryUrl;
     bool m_amazon = false;
     static const geode::utils::StringMap<ServerAPITrust::TrustLevel> m_trustedModsLUT;
+    geode::ListenerHandle m_webRequestInterceptor;
 protected: 
     static ServerAPI *instance;
     void init();

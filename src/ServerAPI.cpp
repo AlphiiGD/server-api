@@ -1,4 +1,5 @@
 #define GEODE_DEFINE_EVENT_EXPORTS
+#include <ranges>
 #include <Geode/Geode.hpp>
 #include "ServerAPI.hpp"
 #include "../include/ServerAPIEvents.hpp"
@@ -119,8 +120,33 @@ void ServerAPI::init() {
     m_cache = ServerCache::none();
 
     // Trims endpoint off of URL.
-    if(this->m_baseUrl.size() > 36) this->m_baseUrl = this->m_baseUrl.substr(0, 35);
-    if(this->m_secondaryUrl.size() > 35) this->m_secondaryUrl = this->m_secondaryUrl.substr(0, 34);
+    if (this->m_baseUrl.size() > 36)
+        this->m_baseUrl = this->m_baseUrl.substr(0, 35);
+    
+    if (this->m_secondaryUrl.size() > 35)
+        this->m_secondaryUrl = this->m_secondaryUrl.substr(0, 34);
+
+    // Overrides web requests to base servers from other mods (Requires them to have a cookie __SERVERAPI_OVERRIDE_URL=1)
+    m_webRequestInterceptor = web::WebRequestInterceptEvent().listen([](web::WebRequest& req) -> ListenerResult {
+        bool shouldOverride = false;
+        for (const auto& cookie : req.getHeaders().at("Cookie")) {
+            if (cookie != "__SERVERAPI_OVERRIDE_URL=1") continue;
+            shouldOverride = true;
+        }
+        if (!shouldOverride) return ListenerResult::Propagate;
+
+        std::string url = req.getUrl();
+        if (url.starts_with(ServerAPI::get()->getBaseUrl())) {
+            url.replace(0, ServerAPI::get()->getBaseUrl().size(), ServerAPI::get()->getCurrentURL());
+        } else if (url.starts_with(ServerAPI::get()->getSecondaryUrl())) {
+            url.replace(0, ServerAPI::get()->getSecondaryUrl().size(), ServerAPI::get()->getCurrentURL());
+        } else {
+            return ListenerResult::Propagate;
+        }
+        req.url(std::move(url));
+
+        return ListenerResult::Propagate;
+    });
 }
 
 void ServerAPI::evaluateCache() {
