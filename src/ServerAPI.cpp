@@ -10,7 +10,7 @@
 using namespace ServerAPIEvents;
 using namespace geode::prelude;
 
-constexpr int REQUIRED_GD_VERSION = 22081;
+constexpr int REQUIRED_GD_VERSION = 22081; // we should put this somewhere else probably
 
 const StringMap<ServerAPITrust::TrustLevel> ServerAPI::m_trustedModsLUT = {
     {"lblazen.gdps_hub", ServerAPITrust::TrustLevel::HighlyTrusted},
