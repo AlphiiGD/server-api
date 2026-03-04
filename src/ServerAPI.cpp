@@ -127,9 +127,15 @@ void ServerAPI::init() {
         this->m_secondaryUrl = this->m_secondaryUrl.substr(0, 34);
 
     // Overrides web requests to base servers from other mods (Requires them to have a cookie __SERVERAPI_OVERRIDE_URL=1)
-    m_webRequestInterceptor = web::WebRequestInterceptEvent().listen([](web::WebRequest& req) -> ListenerResult {
+    m_webRequestInterceptor = web::WebRequestInterceptEvent().listen([](web::WebRequest& req) noexcept -> ListenerResult {
         bool shouldOverride = false;
-        for (const auto& cookie : req.getHeaders().at("Cookie")) {
+        auto headers = req.getHeaders();
+        // Out of range exception if we don't do this
+        if (!headers.contains("Cookie")) {
+            return ListenerResult::Propagate;
+        }
+
+        for (const auto& cookie : headers.at("Cookie")) {
             if (cookie != "__SERVERAPI_OVERRIDE_URL=1") continue;
             shouldOverride = true;
         }
