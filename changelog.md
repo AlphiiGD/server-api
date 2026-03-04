@@ -1,5 +1,5 @@
 # 4.0.0
-- Updated to Geode v5.0.3
+- Updated to Geode v5.3.0
 - Now using event exports (thanks Jasmine)
 - Web request using Geode's web::WebRequest class can be overwritten (requires a cookie)
 # 3.0.0
