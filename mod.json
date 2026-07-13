@@ -8,7 +8,7 @@
   },
   "id": "km7dev.server_api",
   "name": "Server API",
-  "version": "v4.0.0",
+  "version": "v4.0.1",
   "developer": "km7dev",
   "description": "An API for using other GD servers",
   "api": {
@@ -17,13 +17,11 @@
   "tags": ["api", "developer"],
   "early-load": true,
   "links": {
-    "source": "https://github.com/kingminer7/server-api",
-    "community": "https://discord.gg/Vj5Mcennph",
-    "homepage": "https://km7dev.tech"
+    "source": "https://github.com/AlphiiGD/server-api"
   },
   "issues": {
-    "info": "Report issues in my Discord server.",
-    "url": "https://discord.gg/Vj5Mcennph"
+    "info": "Report issues on GitHub.",
+    "url": "https://github.com/AlphiiGD/server-api"
   },
   "settings": {
     "open-debug": {

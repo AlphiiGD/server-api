@@ -1,3 +1,5 @@
+# 4.0.1
+- Updated GitHub link and removed old server and site links
 # 4.0.0
 - Updated to Geode v5.3.0
 - Now using event exports (thanks Jasmine)
